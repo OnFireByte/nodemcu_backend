@@ -59,7 +59,7 @@ app.post("/nodemcu", express.urlencoded({ extended: true }), async (req, res) =>
 });
 
 app.get("/nodemcu", async (req, res) => {
-    const setting = await getDoc(doc(db, "setting", "setting"));
+    const setting = (await getDoc(doc(db, "setting", "setting"))).data();
     const now = (
         await getDocs(query(collection(db, "rawdata"), orderBy("time", "desc"), limit(1)))
     ).docs[0].data();
@@ -168,6 +168,6 @@ app.post("/setting", express.json(), async (req, res) => {
     }
 });
 
-app.listen(port, () => {
+app.listen(port, async () => {
     console.log(`App listening on port ${port}`);
 });
