@@ -135,6 +135,11 @@ app.get("/now", async (req, res) => {
     }
 });
 
+app.get("/setting", async (req, res) => {
+    const setting = (await getDoc(doc(db, "setting", "setting"))).data();
+    res.send(setting);
+});
+
 app.post("/setting", express.json(), async (req, res) => {
     const data = req.body;
     const list = ["temp", "humid", "light", "dust"];
