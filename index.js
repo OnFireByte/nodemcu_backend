@@ -34,6 +34,9 @@ app.post("/nodemcu", express.urlencoded({ extended: true }), async (req, res) =>
     data.time = Date.now();
     res.send(JSON.stringify(data));
     try {
+        if (data.dust == 0) {
+            return;
+        }
         dataArray.push(data);
         await writeFile("./data.json", JSON.stringify(dataArray));
     } catch (e) {
