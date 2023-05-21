@@ -136,8 +136,6 @@ app.get("/now", async (req, res) => {
 });
 
 app.post("/setting", express.json(), async (req, res) => {
-    ls;
-
     const data = req.body;
     const list = ["temp", "humid", "light", "dust"];
     for (const name of list) {
